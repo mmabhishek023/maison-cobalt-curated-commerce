@@ -1,6 +1,8 @@
 # Work list
 
 - [ ] Document the storefront plan and establish the premium, responsive shop experience.
+- [ ] Use the confirmed AUREL name throughout the storefront and page metadata.
+- [ ] Inspect the existing Supabase schema once the user connects it, then adapt live integrations to those real tables and functions.
 - [ ] Build routed storefront pages: home, shop, categories, product details, search, cart, checkout, and policy/contact/about pages.
 - [ ] Build email account flows and customer account pages for profile, addresses, wishlist, orders, and tracking.
 - [ ] Build the separate admin experience for overview, products, categories, coupons, orders, and customers.

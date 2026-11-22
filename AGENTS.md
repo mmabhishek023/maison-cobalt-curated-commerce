@@ -28,3 +28,7 @@ use the editor.
   own key and store it in Secrets.
 - **Secrets.** Lovable manages them. Do not put secret values in the repo.
 <!-- LOVABLE:END -->
+
+## Storefront architecture
+
+- Keep customer-facing commerce and admin views as file-based TanStack routes with shared presentation shells and a browser Supabase client; this preserves route-level metadata and separates public browsing from gated account and admin areas.

@@ -1,0 +1,9 @@
+export function pageMeta(title: string, description: string) {
+  const fullTitle = `${title} | AUREL`;
+  return [
+    { title: fullTitle },
+    { name: "description", content: description },
+    { property: "og:title", content: fullTitle },
+    { property: "og:description", content: description },
+  ];
+}
