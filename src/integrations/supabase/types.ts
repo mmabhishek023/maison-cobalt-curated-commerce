@@ -14,6 +14,39 @@ export type Database = {
   }
   public: {
     Tables: {
+      categories: {
+        Row: {
+          created_at: string
+          description: string | null
+          id: string
+          image_url: string | null
+          is_active: boolean
+          name: string
+          slug: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          description?: string | null
+          id?: string
+          image_url?: string | null
+          is_active?: boolean
+          name: string
+          slug: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          description?: string | null
+          id?: string
+          image_url?: string | null
+          is_active?: boolean
+          name?: string
+          slug?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       coupon_usage: {
         Row: {
           coupon_id: string
@@ -398,6 +431,7 @@ export type Database = {
       }
       products: {
         Row: {
+          category_id: string | null
           created_at: string
           description: string | null
           discount_percentage: number
@@ -409,10 +443,12 @@ export type Database = {
           price: number
           primary_image_path: string | null
           sku: string
+          slug: string
           stock_quantity: number
           updated_at: string
         }
         Insert: {
+          category_id?: string | null
           created_at?: string
           description?: string | null
           discount_percentage?: number
@@ -424,10 +460,12 @@ export type Database = {
           price: number
           primary_image_path?: string | null
           sku: string
+          slug: string
           stock_quantity?: number
           updated_at?: string
         }
         Update: {
+          category_id?: string | null
           created_at?: string
           description?: string | null
           discount_percentage?: number
@@ -439,10 +477,19 @@ export type Database = {
           price?: number
           primary_image_path?: string | null
           sku?: string
+          slug?: string
           stock_quantity?: number
           updated_at?: string
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "products_category_id_fkey"
+            columns: ["category_id"]
+            isOneToOne: false
+            referencedRelation: "categories"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       profiles: {
         Row: {
