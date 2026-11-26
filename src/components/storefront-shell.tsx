@@ -5,6 +5,7 @@ import {
   ArrowRight,
   ChevronDown,
   Heart,
+  LayoutDashboard,
   Menu,
   Search,
   ShoppingBag,
@@ -55,7 +56,7 @@ function SearchForm({ onSearch }: { onSearch?: () => void }) {
 
 export function StorefrontHeader() {
   const [menuOpen, setMenuOpen] = useState(false);
-  const { user } = useAuth();
+  const { user, isAdmin, roleUserId } = useAuth();
   const { cartCount, wishlist } = useShopState();
   const queryClient = useQueryClient();
   const navigate = useNavigate();
@@ -100,6 +101,11 @@ export function StorefrontHeader() {
                 {link.label === "Categories" && <ChevronDown className="size-3.5 text-soft-slate" aria-hidden="true" />}
               </Link>
             ))}
+            {user && isAdmin && roleUserId === user.id && (
+              <Link to="/admin/dashboard" className="inline-flex items-center gap-2 py-2 text-[12px] font-semibold text-midnight transition-colors hover:text-cobalt">
+                <LayoutDashboard className="size-3.5" aria-hidden="true" /> Admin Dashboard
+              </Link>
+            )}
           </nav>
           <div className="hidden w-full max-w-[250px] xl:block">
             <SearchForm />
@@ -137,6 +143,9 @@ export function StorefrontHeader() {
                 ))}
                 <Link to="/wishlist" onClick={() => setMenuOpen(false)} className="flex items-center justify-between py-3.5 text-sm font-semibold text-midnight">Wishlist<Heart className="size-4 text-soft-slate" /></Link>
                 <Link to={user ? "/account" : "/login"} onClick={() => setMenuOpen(false)} className="flex items-center justify-between py-3.5 text-sm font-semibold text-midnight">{user ? "My account" : "Sign in"}<UserRound className="size-4 text-soft-slate" /></Link>
+                {user && isAdmin && roleUserId === user.id && (
+                  <Link to="/admin/dashboard" onClick={() => setMenuOpen(false)} className="flex items-center justify-between py-3.5 text-sm font-semibold text-midnight">Admin Dashboard<LayoutDashboard className="size-4 text-soft-slate" /></Link>
+                )}
               </nav>
             </div>
           </div>

@@ -32,3 +32,4 @@ use the editor.
 ## Storefront architecture
 
 - Keep customer-facing commerce and admin views as file-based TanStack routes with shared presentation shells and a browser Supabase client; this preserves route-level metadata and separates public browsing from gated account and admin areas.
+- Keep admin authentication under nested `/admin` routes, verify the signed-in user's `user_roles` row before rendering protected screens, and rely on RLS for data access because browser route checks are only a presentation boundary.

@@ -58,6 +58,12 @@ function stringValue(value: unknown, fallback = ""): string {
   return typeof value === "string" ? value : fallback;
 }
 
+function errorMessage(value: unknown): string | null {
+  if (typeof value !== "object" || value === null || !("message" in value)) return null;
+  const message = value["message"];
+  return typeof message === "string" ? message : null;
+}
+
 function imageUrl(pathOrUrl: string): string {
   if (pathOrUrl.startsWith("https://") || pathOrUrl.startsWith("http://")) return pathOrUrl;
   return pathOrUrl ? supabase.storage.from("product-images").getPublicUrl(pathOrUrl).data.publicUrl : "";
@@ -185,7 +191,7 @@ export async function getCategory(slug: string): Promise<CatalogResult<Category 
     .eq("slug", slug)
     .eq("is_active", true)
     .maybeSingle();
-  if (!data) return { data: null, error: error?.message ?? null };
+  if (!data) return { data: null, error: errorMessage(error) };
   const row = asRecord(data);
   return {
     data: {
@@ -195,6 +201,6 @@ export async function getCategory(slug: string): Promise<CatalogResult<Category 
       description: stringValue(row["description"]),
       imageUrl: stringValue(row["image_url"]),
     },
-    error: error?.message ?? null,
+    error: errorMessage(error),
   };
 }

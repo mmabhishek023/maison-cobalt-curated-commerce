@@ -149,12 +149,9 @@ export async function saveAdminCoupon(draft: CouponDraft) {
 }
 
 export async function listAdminOrders(search: string) {
+  const searchTerm = search.trim();
   return supabase.rpc("admin_search_orders", {
-    p_search: search.trim() || null,
-    p_status: null,
-    p_payment_status: null,
-    p_created_from: null,
-    p_created_before: null,
+    ...(searchTerm ? { p_search: searchTerm } : {}),
     p_limit: 100,
     p_offset: 0,
   });
@@ -169,9 +166,8 @@ export async function updateAdminOrder(
   return supabase.rpc("admin_update_order_status", {
     p_order_id: orderId,
     p_new_status: status,
-    p_courier_name: courierName || null,
-    p_tracking_number: trackingNumber || null,
-    p_admin_notes: null,
+    ...(courierName ? { p_courier_name: courierName } : {}),
+    ...(trackingNumber ? { p_tracking_number: trackingNumber } : {}),
   });
 }
 

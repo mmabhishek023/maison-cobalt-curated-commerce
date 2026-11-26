@@ -8,3 +8,4 @@
 - [ ] Build an admin workspace for products/images, categories, coupons, orders/shipping, and customer records using existing admin checks.
 - [ ] Add focused tests for new business rules and run the existing project tests.
 - [ ] Verify storefront and gated flows, responsive layouts, route metadata, and preview health; list any manual Supabase setup.
+- [x] Add a dedicated Supabase admin sign-in, role-gated dashboard access, admin-only navigation, and safe logout.
